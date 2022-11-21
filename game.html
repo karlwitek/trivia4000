@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeopardy Trivia</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+  <script src="/javascript/game.js" type="module"></script>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <div id="container" class="">
+    <script type="text/x-handlebars" id="main_template">
+      <p class="question">{{ question }}</p>
+      <form id="form">
+        {{#each fourGuesses }}
+        <label data-text="{{this}}">{{this}}</label>
+        {{/each}}
+        <input type="button" id="submit" value="submit" name="submit">  
+      </form>
+    </script>
+  </div>
+  <p id="answer"></p>
+  <div id="overlay" class="">
+    <div id="start_modal">
+      <p>Click Start to begin</p>
+      <input id="start_btn" type="button" value="START">
+    </div>
+  </div>
+  <div id="message" class=""></div>
+  <div id="replay_overlay" class="hide_overlay">
+    <p id="result_msg"></p>
+
+    <div id="prompt" class=""> 
+      <input type="button" value="play again" id="play_again">
+      <input type="button" value="quit game" id="quit">
+    </div>
+    <div id="standings_div" class="hide_overlay">
+      <script type="text/x-handlebars" id="standings_template">
+        <table>
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Games Played</th>
+              <th>Correct Guesses</th>
+              <th>Incorrect Guesses</th>
+              <th>Correct Guess %</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each array}}
+            <tr>
+              <td>{{this.username}}</td>
+              <td>{{this.numGamesPlayed}}</td>
+              <td>{{this.correct}}</td>
+              <td>{{this.incorrect}}</td>
+              <td>{{percent this.correct this.totalGuesses}}</td>
+            </tr>
+            {{/each}}
+      </script>
+    </div>
+  </div>
+
+</body>
+</html>

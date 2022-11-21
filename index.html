@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up</title>
+  <link rel="stylesheet" href="/css/login.css">
+  <script src="/javascript/login.js"></script>
+</head>
+<body>
+  <h1>Trivia</h1>
+  <div id="login_container">
+    <h3>Sign in to play</h3>
+    <form id="login">
+      <dl>
+        <dt><label for="name">User name</label>
+        </dt>
+        <dd><input id="name" name="username" type="text">
+        </dd><br>
+        <dt><label for="password">Password</label>
+        </dt>
+        <dd><input id="password" type="text" name="password">
+        </dd><br>
+      </dl>
+      <input id="submit_login" type="button" value="sign in">
+    </form>
+  </div>
+  <h2 id="login_msg" class="hide">Not Found, Try again or create account</h2>
+  <div id="create_user">
+    <h3>Register to start playing !</h3>
+    <form id="new_user">
+      <dl>
+        <dt><label for="name">User name</label>
+        </dt>
+        <dd><input id="name" name="username" type="text">
+        </dd><br>
+        <dt><label for="password">Password</label>
+        </dt>
+        <dd><input id="password_new" type="text" name="password">
+        </dd><br>
+      </dl>
+      <input id="new_user_btn" type="button" value="register">
+    </form>
+  </div>
+  <h2 id="saved_msg" class="hide">Saved successfully!</h2>
+</body>
+</html>

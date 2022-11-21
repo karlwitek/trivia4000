@@ -4,7 +4,7 @@
   "description": "trivia game using postgresql to store player data",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "karl witek",
   "license": "ISC",
