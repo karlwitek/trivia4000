@@ -99,21 +99,6 @@ const Login = {
     this.sendNewUserData(idObj);
   },
 
-  // createNewUser() {
-  //   let form = document.getElementById('new_user');
-  //   let newUserObj = {
-  //     username: form.username.value,
-  //     password: form.password.value,
-  //     totalGuesses: 0,
-  //     correct: 0,
-  //     incorrect: 0,
-  //     numGamesPlayed: 0,
-  //     active: false
-  //   };
-
-  //   this.sendNewUserData(newUserObj);
-  // },
-
   requestGamePage() {
     window.location.href = "http://localhost:3000/game";
   },
