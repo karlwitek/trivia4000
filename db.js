@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  host: 'http://trivia4000.herokuapp.com',
+  host: 'localhost',
   user: 'karl',
   database: 'players',
   password: 'karl123',
