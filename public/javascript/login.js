@@ -49,6 +49,8 @@ const Login = {
   searchForUser(userObj) {
     let url = '/login';
 
+    console.log(userObj);
+
     let init = {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

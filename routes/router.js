@@ -14,7 +14,7 @@ router.get('/reset', (req, res) => {
     } else {
       res.send('reset');
     }
-   })
+   });
 });
 
 router.get('/', (req, res) => {
@@ -23,7 +23,9 @@ router.get('/', (req, res) => {
 });
 
 // test route to inspect data
-router.get('/data', (req, res) => {// type in url to see data
+router.get('/data', (req, res) => {
+  console.log('in data route');
+
   pool.query('SELECT * FROM users', (err, result) => {
     if (err) {
       console.log(err.stack);
@@ -40,7 +42,7 @@ router.get('/game', (req, res) => {
 });
 
 router.get('/find', (req, res) => {
-  pool.query('SELECT* FROM users WHERE active=true', (err, result) => {
+  pool.query('SELECT * FROM users WHERE active=true', (err, result) => {
     if (err) {
       console.log(err.stack);
       process.exit(1);
@@ -90,11 +92,14 @@ router.post('/active', (req, res) => {
 });
 
 router.post('/update', (req, res) => {
-  let query = 'UPDATE users SET correct=correct + req.body.gameStats.correct' +
-   'incorrect=incorrect + req.body.gameStats.incorrect' +
-   'totalGuesses=totalGuesses + req.body.gameStats.totalGuesses WHERE' +
-    'username=req.body.filter.username AND userpassword=req.body.filter.userpassword';
-  pool.query(query, (err, result) => {
+  let gameStatsObj = req.body.gameStats;
+  let filterObj = req.body.filter;
+  
+  // res.send(gameStatObj);
+
+  let query = 'UPDATE users SET correct=correct + $1, incorrect = incorrect + $2, totalguesses=totalguesses + $3, numgamesplayed = numgamesplayed + 1 WHERE username = $4 AND userpassword = $5';
+
+  pool.query(query, [gameStatsObj.correct, gameStatsObj.incorrect, gameStatsObj.totalGuesses, filterObj.username, filterObj.userpassword], (err, result) => {
     if (err) {
       console.log(err.stack);
       process.exit(1);

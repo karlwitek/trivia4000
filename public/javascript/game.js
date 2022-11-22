@@ -2,6 +2,8 @@
 
 class Game {
   constructor(playerObj) {
+    console.log(playerObj);
+
     this.player = playerObj;
   }
 
@@ -127,11 +129,13 @@ const App = {
   },
 
   setUpGameObjects() {
+    console.log(this.user);
+
     let trackObj = new Game(this.user);
     this.filterObj = trackObj.createFilterObj();
     this.gameStatObj = trackObj.createStatObj();
 
-    console.log(this.filterObj);
+    // console.log(this.filterObj);
   },
 
   updateStatObj() {
@@ -209,11 +213,15 @@ const App = {
     let init = {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(gameObj);
+      body: JSON.stringify(gameObj)
     };
 
-    return fetch(url, init).then(response = response.text())
+    // uncomment
+    return fetch(url, init).then(response => response.text())
       .then(text => console.log(text)).catch((err) => console.log(err));
+
+    // return fetch(url, init).then(response => response.json())
+    //   .then(data => console.log(data)).catch((err) => console.log(err));
   },
 
   promptUser() {
@@ -232,6 +240,7 @@ const App = {
 
     // get all users, pass to temp fn
     let arrayUsers = await this.getAllUsers();
+    console.log(arrayUsers);
 
     function compare(a, b) {
       if (a.numGamesPlayed > b.numGamesPlayed) { return -1 };
