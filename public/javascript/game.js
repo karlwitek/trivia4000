@@ -1,4 +1,3 @@
-// class for Game {} ?
 
 class Game {
   constructor(playerObj) {
@@ -134,8 +133,6 @@ const App = {
     let trackObj = new Game(this.user);
     this.filterObj = trackObj.createFilterObj();
     this.gameStatObj = trackObj.createStatObj();
-
-    // console.log(this.filterObj);
   },
 
   updateStatObj() {
@@ -216,12 +213,8 @@ const App = {
       body: JSON.stringify(gameObj)
     };
 
-    // uncomment
     return fetch(url, init).then(response => response.text())
       .then(text => console.log(text)).catch((err) => console.log(err));
-
-    // return fetch(url, init).then(response => response.json())
-    //   .then(data => console.log(data)).catch((err) => console.log(err));
   },
 
   promptUser() {
@@ -238,13 +231,12 @@ const App = {
     const standingsDiv = document.getElementById('standings_div');
     standingsDiv.classList.remove('hide_overlay');
 
-    // get all users, pass to temp fn
+    // get all users, pass to template fn
     let arrayUsers = await this.getAllUsers();
-    console.log(arrayUsers);
-
+    
     function compare(a, b) {
-      if (a.numGamesPlayed > b.numGamesPlayed) { return -1 };
-      if (a.numGamesPlayed < b.numGamesPlayed) { return 1 };
+      if (a.numgamesplayed > b.numgamesplayed) { return -1 };
+      if (a.numgamesplayed < b.numgamesplayed) { return 1 };
       return 0;
     }
 
@@ -275,9 +267,9 @@ const App = {
     this.removeReplayOverlay();
   },
 
-  testLog() {
-    console.log(this.user);
-  },
+  // testLog() {
+  //   console.log(this.user);
+  // },
 
 };
 

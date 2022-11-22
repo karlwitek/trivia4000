@@ -22,7 +22,6 @@ router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
-// test route to inspect data
 router.get('/data', (req, res) => {
   console.log('in data route');
 
@@ -59,9 +58,9 @@ router.post('/login', (req, res) => {
    (err, result) => {
     if (err) {
       console.log(err.stack);
-      process.exit(1);// ..??
+      process.exit(1);
     } else {
-      res.send(result.rows);// is []
+      res.send(result.rows);
     };
 
    });
@@ -95,8 +94,6 @@ router.post('/update', (req, res) => {
   let gameStatsObj = req.body.gameStats;
   let filterObj = req.body.filter;
   
-  // res.send(gameStatObj);
-
   let query = 'UPDATE users SET correct=correct + $1, incorrect = incorrect + $2, totalguesses=totalguesses + $3, numgamesplayed = numgamesplayed + 1 WHERE username = $4 AND userpassword = $5';
 
   pool.query(query, [gameStatsObj.correct, gameStatsObj.incorrect, gameStatsObj.totalGuesses, filterObj.username, filterObj.userpassword], (err, result) => {
