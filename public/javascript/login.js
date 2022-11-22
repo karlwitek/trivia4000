@@ -40,7 +40,7 @@ const Login = {
 
     let userInfo = {
       username: nameInput.value,
-      password: passwordInput.value
+      userpassword: passwordInput.value
     };
 
     this.searchForUser(userInfo);
@@ -58,6 +58,7 @@ const Login = {
     fetch(url, init).then(response => response.json())
       .then(data => {// data is an [ {} ] , or empty..
         if (data.length > 0) {
+          console.log('found user');
           this.recordCurrentUser(data[0]);
           this.requestGamePage();
         } else {
