@@ -34,6 +34,11 @@ router.get('/testdata', (req, res) => {// type in url to see data
   });
 });
 
+router.get('/game', (req, res) => {
+  res.status(200);
+  res.sendFile(path.join(__dirname, '../game.html'));
+});
+
 // posts
 
 router.post('/login', (req, res) => {
