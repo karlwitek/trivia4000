@@ -39,6 +39,17 @@ router.get('/game', (req, res) => {
   res.sendFile(path.join(__dirname, '../game.html'));
 });
 
+router.get('/find', (req, res) => {
+  pool.query('SELECT* FROM users WHERE active=true', (err, result) => {
+    if (err) {
+      console.log(err.stack);
+      process.exit(1);
+    } else {
+      res.send(result.rows[0]);
+    }
+  });
+});
+
 // posts
 
 router.post('/login', (req, res) => {
@@ -67,7 +78,7 @@ router.post('/new', (req, res) => {
 });
 
 router.post('/active', (req, res) => {
-  pool.query('UPDATE users WHERE username=$1 AND userpassword=$2', [req.body.username, req.body.userpassword],
+  pool.query('UPDATE users SET active=true WHERE username=$1 AND userpassword=$2', [req.body.username, req.body.userpassword],
    (err, result) => {
     if (err) {
       console.log(err.stack);
@@ -77,13 +88,5 @@ router.post('/active', (req, res) => {
     }
    });
 });
-
-// router.use('/', (req, res) => {
-//   pool.query('SELECT * FROM users', (err, result) => {
-//     if (err) { console.log(err.stack); }
-//     res.send(result.rows);
-//   });
-// });
-
 
 module.exports = router;

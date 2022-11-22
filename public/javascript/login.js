@@ -58,7 +58,7 @@ const Login = {
     fetch(url, init).then(response => response.json())
       .then(data => {// data is an [ {} ] , or empty..
         if (data.length > 0) {
-          console.log('found user');
+          console.log(data[0]);
           this.recordCurrentUser(data[0]);
           this.requestGamePage();
         } else {
