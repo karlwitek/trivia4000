@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 });
 
 // test route to inspect data
-router.get('/testdata', (req, res) => {// type in url to see data
+router.get('/data', (req, res) => {// type in url to see data
   pool.query('SELECT * FROM users', (err, result) => {
     if (err) {
       console.log(err.stack);
@@ -87,6 +87,21 @@ router.post('/active', (req, res) => {
       res.send('made user active');
     }
    });
+});
+
+router.post('/update', (req, res) => {
+  let query = 'UPDATE users SET correct=correct + req.body.gameStats.correct' +
+   'incorrect=incorrect + req.body.gameStats.incorrect' +
+   'totalGuesses=totalGuesses + req.body.gameStats.totalGuesses WHERE' +
+    'username=req.body.filter.username AND userpassword=req.body.filter.userpassword';
+  pool.query(query, (err, result) => {
+    if (err) {
+      console.log(err.stack);
+      process.exit(1);
+    } else {
+      res.send('updated');
+    }
+  });
 });
 
 module.exports = router;

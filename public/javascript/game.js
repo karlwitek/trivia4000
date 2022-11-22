@@ -31,8 +31,25 @@ const App = {
     this.createTemplateFn();
     this.renderQuestion();
     this.setUpGameObjects();
+    this.bindEvents();
 
     this.testLog();
+  },
+
+  bindEvents() {
+    const submitBtn = document.getElementById('submit');
+    submitBtn.addEventListener('mousedown', this.updateStatObj.bind(this));
+
+    const startBtn = document.getElementById('start_btn');
+    startBtn.addEventListener('mousedown', this.removeOverlay.bind(this));
+
+    const playBtn = document.getElementById('play_again');
+    playBtn.addEventListener('mousedown', this.startNewGame.bind(this));
+
+    const quitBtn = document.getElementById('quit');
+    quitBtn.addEventListener('mousedown', () => {
+      window.location.href = "http://localhost:3000";
+    });
   },
 
   makeReqForQuestions() {
@@ -117,7 +134,137 @@ const App = {
     console.log(this.filterObj);
   },
 
+  updateStatObj() {
+    let guess = this.collectAnswer();
 
+    if (guess === this.currentCorrect) {
+      this.gameStatObj.correct += 1;
+      this.displayCorrectMsg();
+    } else {
+      this.gameStatObj.incorrect += 1;
+      this.displayIncorrectMsg();
+    }
+
+    this.gameStatObj.totalGuesses += 1;
+
+    if (this.gameStatObj.totalGuesses > 2) {
+      setTimeout(() => {
+        this.endGame();
+      }, 1500);
+    } else {
+      setTimeout(() => {
+        this.renderQuestion();
+        this.rebindSubmitBtn();
+      }, 1500);
+    }
+  },
+
+  collectAnswer() {
+    const form = document.getElementById('form');
+    let clickedGuess = form.querySelector('.highlight_click');
+    if (clickedGuess) {
+      return clickedGuess.dataset.text;
+    } else {
+      console.log('no guess');// notify player
+    }
+  },
+
+  displayCorrectMsg() {
+    const div = document.getElementById('message');
+    div.style.color = 'yellow';
+    div.classList.remove('rotate_down');
+    div.classList.add('rotate_up');
+    div.textContent = 'Correct !!!';
+  },
+
+  displayIncorrectMsg() {
+    const div = document.getElementById('message');
+    const answerP = document.getElementById('answer');
+    div.style.color = 'red';
+    div.classList.remove('rotate_up');
+    div.classList.add('rotate_down');
+    div.textContent = 'Incorrect';
+    answerP.textContent = `Answer: ${this.currentCorrect}`;
+  },
+
+  rebindSubmitBtn() {
+    const btn = document.getElementById('submit');
+    btn.addEventListener('mousedown', this.updateStatObj.bind(this));
+  },
+    
+  async endGame() {
+    let obj = {
+      filter: this.filterObj,
+      gameStats: this.gameStatObj
+    };
+
+    await this.recordGame(obj);
+    this.promptUser();
+    this.showGameMsg();
+    this.showStandings();
+  },
+
+  recordGame(gameObj) {
+    let url = '/update';
+    let init = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(gameObj);
+    };
+
+    return fetch(url, init).then(response = response.text())
+      .then(text => console.log(text)).catch((err) => console.log(err));
+  },
+
+  promptUser() {
+    const replayOverlay = document.getElementById('replay_overlay');
+    replayOverlay.classList.remove('hide_overlay');
+  },
+
+  showGameMsg() {
+    const p = document.getElementById('result_msg');
+    p.textContent = `You scored ${this.gameStatObj.correct} out of ${this.gameStatObj.totalGuesses}`;
+  },
+
+  async showStandings() {
+    const standingsDiv = document.getElementById('standings_div');
+    standingsDiv.classList.remove('hide_overlay');
+
+    // get all users, pass to temp fn
+    let arrayUsers = await this.getAllUsers();
+
+    function compare(a, b) {
+      if (a.numGamesPlayed > b.numGamesPlayed) { return -1 };
+      if (a.numGamesPlayed < b.numGamesPlayed) { return 1 };
+      return 0;
+    }
+
+    arrayUsers.sort(compare);
+    let templObj = { array: arrayUsers };
+    standingsDiv.innerHTML = this.standingsTempFn(templObj);
+  },
+
+  getAllUsers() {
+    return fetch('/data').then(response => response.json())
+      .then(data => data).catch((err) => console.log(err));
+  },
+
+  removeOverlay() {
+    const overlay = document.getElementById('overlay');
+    overlay.classList.add('hide_overlay');
+  },
+
+  removeReplayOverlay() {
+    const replayOverlay = document.getElementById('replay_overlay');
+    replayOverlay.classList.add('hide_overlay'); 
+  },
+
+  startNewGame() {
+    this.renderQuestion();
+    this.rebindSubmitBtn();
+    this.setUpGameObjects();
+    this.removeReplayOverlay();
+  },
 
   testLog() {
     console.log(this.user);
