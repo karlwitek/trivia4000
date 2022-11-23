@@ -34,7 +34,7 @@ const App = {
     this.setUpGameObjects();
     this.bindEvents();
 
-    this.testLog();
+    // this.testLog();
   },
 
   bindEvents() {
