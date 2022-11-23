@@ -103,7 +103,6 @@ const Login = {
 
   requestGamePage() {
     // window.location.href = "http://localhost:5000/game";
-    console.log(process.env.NODE_ENV);
 
     let body = document.querySelector('body');
 

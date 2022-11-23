@@ -1,11 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../db');
+const poolDev = require('../db');
+const poolProd = require('../dbProd');// w/ connection string production..
 const path = require('path');
 
 router.use(express.json());
 
 router.get('/reset', (req, res) => {
+  // console.log(process.env.NODE_ENV);
+
+  const pool = process.env.NODE_ENV === 'development' ? poolDev : poolProd;
+
+
   pool.query('UPDATE users SET active=false WHERE active=true',
    (err, result) => {
     if (err) {
@@ -25,6 +31,9 @@ router.get('/', (req, res) => {
 router.get('/data', (req, res) => {
   console.log('in data route');
 
+  const pool = process.env.NODE_ENV === 'development' ? poolDev : poolProd;
+
+
   pool.query('SELECT * FROM users', (err, result) => {
     if (err) {
       console.log(err.stack);
@@ -41,6 +50,9 @@ router.get('/game', (req, res) => {
 });
 
 router.get('/find', (req, res) => {
+
+  const pool = process.env.NODE_ENV === 'development' ? poolDev : poolProd;
+
   pool.query('SELECT * FROM users WHERE active=true', (err, result) => {
     if (err) {
       console.log(err.stack);
@@ -54,6 +66,9 @@ router.get('/find', (req, res) => {
 // posts
 
 router.post('/login', (req, res) => {
+
+  const pool = process.env.NODE_ENV === 'development' ? poolDev : poolProd;
+
   pool.query('SELECT * FROM users WHERE username=$1 AND userpassword=$2', [req.body.username, req.body.userpassword],
    (err, result) => {
     if (err) {
@@ -67,6 +82,9 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/new', (req, res) => {
+
+  const pool = process.env.NODE_ENV === 'development' ? poolDev : poolProd;
+
   pool.query('INSERT INTO users(username, userpassword) VALUES($1, $2)', [req.body.username, req.body.userpassword],
     (err, result) => {
       if (err) {
@@ -79,6 +97,9 @@ router.post('/new', (req, res) => {
 });
 
 router.post('/active', (req, res) => {
+
+  const pool = process.env.NODE_ENV === 'development' ? poolDev : poolProd;
+
   pool.query('UPDATE users SET active=true WHERE username=$1 AND userpassword=$2', [req.body.username, req.body.userpassword],
    (err, result) => {
     if (err) {
@@ -93,6 +114,9 @@ router.post('/active', (req, res) => {
 router.post('/update', (req, res) => {
   let gameStatsObj = req.body.gameStats;
   let filterObj = req.body.filter;
+
+  const pool = process.env.NODE_ENV === 'development' ? poolDev : poolProd;
+
   
   let query = 'UPDATE users SET correct=correct + $1, incorrect = incorrect + $2, totalguesses=totalguesses + $3, numgamesplayed = numgamesplayed + 1 WHERE username = $4 AND userpassword = $5';
 
