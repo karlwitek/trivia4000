@@ -7,8 +7,6 @@ const path = require('path');
 router.use(express.json());
 
 router.get('/reset', (req, res) => {
-  // console.log(process.env.NODE_ENV);
-
   const pool = process.env.NODE_ENV === 'development' ? poolDev : poolProd;
 
 

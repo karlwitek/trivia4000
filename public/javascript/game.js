@@ -34,7 +34,7 @@ const App = {
     this.setUpGameObjects();
     this.bindEvents();
 
-    // this.testLog();
+    this.testLog();
   },
 
   bindEvents() {
@@ -50,6 +50,8 @@ const App = {
     const quitBtn = document.getElementById('quit');
     quitBtn.addEventListener('mousedown', () => {
       window.location.href = "http://trivia4000.herokuapp.com";
+      // need diff value for running locally
+      //window.location.href = "http://localhost:5000";
     });
   },
 
@@ -267,9 +269,9 @@ const App = {
     this.removeReplayOverlay();
   },
 
-  // testLog() {
-  //   console.log(this.user);
-  // },
+  testLog() {
+    console.log(process.env.NODE_ENV);
+  },
 
 };
 
