@@ -103,8 +103,13 @@ const Login = {
 
   requestGamePage() {
     // window.location.href = "http://localhost:5000/game";
+
+    let body = document.querySelector('body');
+
     fetch('/game').then(response => response.text())
-      .then(text => console.log(text)).catch((err) =>  console.error(err));
+      .then(text => {
+        body.innerHTML = text;
+      }).catch((err) =>  console.error(err));
   },
 
   recordCurrentUser(userObj) {
