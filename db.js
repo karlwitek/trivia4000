@@ -1,7 +1,8 @@
 const { Pool } = require('pg');
+let pool;
 
 if (process.env.NODE_ENV === 'development') {
-  const pool = new Pool({
+  pool = new Pool({
     host: 'localhost',
     user: 'karl',
     database: 'players',
@@ -10,7 +11,7 @@ if (process.env.NODE_ENV === 'development') {
   });
 } else {
   const connectionString = process.env.DATABASE_URL;
-const pool = new Pool({
+pool = new Pool({
   connectionString,
 });
 }
