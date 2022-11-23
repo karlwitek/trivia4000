@@ -45,7 +45,14 @@ router.get('/data', (req, res) => {
 });
 
 router.get('/game', (req, res) => {
-  res.status(200);
+  // res.status(200);
+  // res.sendFile(path.join(__dirname, '../game.html'));
+  // res.render(path.join(__dirname, '../game.html'));
+  // res.send('text for now');
+  res.redirect('/showpage');
+});
+
+router.get('/showpage', (req, res) => {
   res.sendFile(path.join(__dirname, '../game.html'));
 });
 

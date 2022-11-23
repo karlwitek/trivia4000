@@ -104,12 +104,15 @@ const Login = {
   requestGamePage() {
     // window.location.href = "http://localhost:5000/game";
 
-    let body = document.querySelector('body');
+    window.location.href = "http://trivia4000.herokuapp.com/game";
 
-    fetch('/game').then(response => response.text())
-      .then(text => {
-        body.innerHTML = text;
-      }).catch((err) =>  console.error(err));
+
+    // let body = document.querySelector('body');
+
+    // fetch('/game').then(response => response.text())
+    //   .then(text => {
+    //     body.innerHTML = text;
+    //   }).catch((err) =>  console.error(err));
   },
 
   recordCurrentUser(userObj) {
