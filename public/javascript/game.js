@@ -150,7 +150,7 @@ const App = {
 
     this.gameStatObj.totalGuesses += 1;
 
-    if (this.gameStatObj.totalGuesses > 2) {
+    if (this.gameStatObj.totalGuesses > 4) {
       setTimeout(() => {
         this.endGame();
       }, 1500);
