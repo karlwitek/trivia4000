@@ -11,9 +11,9 @@ if (process.env.NODE_ENV === 'development') {
   });
 } else {
   const connectionString = process.env.DATABASE_URL;
-pool = new Pool({
-  connectionString,
-});
-}
+  pool = new Pool({
+    connectionString,
+  });
+};
 
 module.exports = pool;
