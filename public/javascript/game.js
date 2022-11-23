@@ -49,7 +49,7 @@ const App = {
 
     const quitBtn = document.getElementById('quit');
     quitBtn.addEventListener('mousedown', () => {
-      window.location.href = "http://localhost:5000";
+      window.location.href = "http://trivia4000.herokuapp.com";
     });
   },
 
