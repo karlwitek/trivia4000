@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "trivia game using postgresql to store player data",
   "main": "index.js",
+  "engines": {
+    "node": "19.x",
+    "npm": "8.x"
+  },
   "scripts": {
     "start": "node index.js"
   },
