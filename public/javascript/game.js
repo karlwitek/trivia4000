@@ -33,8 +33,6 @@ const App = {
     this.renderQuestion();
     this.setUpGameObjects();
     this.bindEvents();
-
-    this.testLog();
   },
 
   bindEvents() {
@@ -267,10 +265,6 @@ const App = {
     this.rebindSubmitBtn();
     this.setUpGameObjects();
     this.removeReplayOverlay();
-  },
-
-  testLog() {
-    console.log(process.env.NODE_ENV);
   },
 
 };
