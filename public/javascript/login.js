@@ -102,7 +102,9 @@ const Login = {
   },
 
   requestGamePage() {
-    window.location.href = "http://localhost:5000/game";
+    // window.location.href = "http://localhost:5000/game";
+    fetch('/game').then(response => response.text())
+      .then(text => console.log(text)).catch((err) =>  console.error(err));
   },
 
   recordCurrentUser(userObj) {
