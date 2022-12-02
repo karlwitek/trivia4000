@@ -1,16 +1,23 @@
 
 const Login = {
-  init() {
+  async init() {
     this.bindEvents();
-    this.inactivatePlayers();
+    await this.inactivatePlayers().catch(this.logError);
 
     this.currentUser = {};
   },
 
   inactivatePlayers() {
     let url = '/reset';
+    // fetch(url).then(response => response.text())
+    //   .then(text => console.log(text)).catch((err) => console.error(err));
+
     fetch(url).then(response => response.text())
-      .then(text => console.log(text)).catch((err) => console.error(err));
+      .then(text => console.log(text));//.catch((err) => console.error(err));
+  },
+
+  logError(err) {
+    console.error(err);
   },
 
   bindEvents() {
