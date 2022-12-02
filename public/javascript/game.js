@@ -26,17 +26,14 @@ class Game {
 const App = {
   init: async function() {
     this.questionIndex = 0;
-    try {
-      this.questions = await this.makeReqForQuestions();// 1st
-      this.user = await this.findUserObject();
-      this.getRefToElements();
-      this.createTemplateFn();
-      this.renderQuestion();
-      this.setUpGameObjects();
-      this.bindEvents();
-    } catch (err) {
-      console.log(err);
-    }
+    
+    this.questions = await this.makeReqForQuestions().catch(this.test2);// 1st
+    this.user = await this.findUserObject();
+    this.getRefToElements();
+    this.createTemplateFn();
+    this.renderQuestion();
+    this.setUpGameObjects();
+    this.bindEvents();
   },
 
   bindEvents() {
@@ -64,9 +61,11 @@ const App = {
 
   async makeReqForQuestions() {
     const url = "https://99the-trivia-api.com/api/questions?limit=50&region=US&difficulty=medium";
-    return fetch(url).then(response => response.json()).catch((err) => {
-      throw err;
-    });
+    return fetch(url).then(response => response.json());
+  },
+
+  test2(err) {
+    console.log(err);
   },
 
   findUserObject() {
