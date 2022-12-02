@@ -1,8 +1,6 @@
 
 class Game {
   constructor(playerObj) {
-    console.log(playerObj);
-
     this.player = playerObj;
   }
 

@@ -74,11 +74,13 @@ const Login = {
       body: JSON.stringify(newUserObj)
     };
 
-    fetch(url, init).then(response => response.text())
-      .then(text => {
-        console.log(text);
-        this.showSuccessMsg();
-      }).catch((err) => console.error(err));
+    return fetch(url, init);
+
+    // fetch(url, init).then(response => response.text())
+    //   .then(text => {
+    //     console.log(text);
+    //     this.showSuccessMsg();
+    //   }).catch((err) => console.error(err));
   },
 
   showSuccessMsg() {
@@ -86,14 +88,14 @@ const Login = {
     savedH2.classList.add('show');
   },
 
-  createNewUser() {
+  async createNewUser() {
     let form = document.getElementById('new_user');
     let idObj = {
       username: form.username.value,
       userpassword: form.password.value,
     };
 
-    this.sendNewUserData(idObj);
+    await this.sendNewUserData(idObj).catch(this.logError);
   },
 
   requestGamePage() {
@@ -110,9 +112,6 @@ const Login = {
     };
 
     return fetch(url, init);
-
-    // fetch(url, init).then(response => response.text())
-    //   .then(text => console.log(text)).catch((err) => console.error(err));
   },
 
   showNotFoundMsg() {
