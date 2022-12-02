@@ -27,8 +27,8 @@ const App = {
   init: async function() {
     this.questionIndex = 0;
     
-    this.questions = await this.makeReqForQuestions().catch(this.test2);// 1st
-    this.user = await this.findUserObject().catch(this.test2);
+    this.questions = await this.makeReqForQuestions().catch(this.logError);// 1st
+    this.user = await this.findUserObject().catch(this.logError);
     this.getRefToElements();
     this.createTemplateFn();
     this.renderQuestion();
@@ -64,8 +64,9 @@ const App = {
     return fetch(url).then(response => response.json());
   },
 
-  test2(err) {
-    console.error(err);
+  logError(err) {
+    // console.error(err);// all red errors
+    console.log(err);
   },
 
   findUserObject() {
