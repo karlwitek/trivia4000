@@ -8,7 +8,7 @@ const Login = {
 
   inactivatePlayers() {
     let url = '/reset';
-    return fetch(url);//.then(response => response.text());
+    return fetch(url);
   },
 
   logError(err) {
@@ -52,7 +52,6 @@ const Login = {
     } else {
       this.showNotFoundMsg();
     }
-
   },
 
   async searchForUser(userObj) {
@@ -75,12 +74,6 @@ const Login = {
     };
 
     return fetch(url, init).then(response => response.text());
-
-    // fetch(url, init).then(response => response.text())
-    //   .then(text => {
-    //     console.log(text);
-    //     this.showSuccessMsg();
-    //   }).catch((err) => console.error(err));
   },
 
   showSuccessMsg() {
