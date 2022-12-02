@@ -63,7 +63,7 @@ const Login = {
       body: JSON.stringify(userObj)
     };
 
-    return fetch(url, init).then(response => response.json);
+    return fetch(url, init).then(response => response.json());
 
     // fetch(url, init).then(response => response.json())
     //   .then(data => {// data is an [ {} ] , or empty..
