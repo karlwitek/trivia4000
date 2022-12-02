@@ -52,26 +52,18 @@ const App = {
     });
   },
 
-  // makeReqForQuestions() {
-  //   const url = "https://the-trivia-api.com/api/questions?limit=50&region=US&difficulty=medium";
-  //   return fetch(url).then(response => response.json())
-  //   .catch((err) => console.error(err));
-  // },
-
-  async makeReqForQuestions() {
+  makeReqForQuestions() {
     const url = "https://the-trivia-api.com/api/questions?limit=50&region=US&difficulty=medium";
     return fetch(url).then(response => response.json());
   },
 
   logError(err) {
-    // console.error(err);// all red errors
     console.log(err);
   },
 
   findUserObject() {
     let url = '/find';
-    return fetch(url).then(response => response.json())
-      .then(data => data).catch((err) => console.log(err));
+    return fetch(url).then(response => response.json());
   },
 
   getRefToElements() {
@@ -137,8 +129,6 @@ const App = {
   },
 
   setUpGameObjects() {
-    console.log(this.user);
-
     let trackObj = new Game(this.user);
     this.filterObj = trackObj.createFilterObj();
     this.gameStatObj = trackObj.createStatObj();
@@ -208,7 +198,7 @@ const App = {
       gameStats: this.gameStatObj
     };
 
-    await this.recordGame(obj);
+    await this.recordGame(obj).catch(this.logError);
     this.promptUser();
     this.showGameMsg();
     this.showStandings();
@@ -222,8 +212,7 @@ const App = {
       body: JSON.stringify(gameObj)
     };
 
-    return fetch(url, init).then(response => response.text())
-      .then(text => console.log(text)).catch((err) => console.log(err));
+    return fetch(url, init).then(response => response.text());
   },
 
   promptUser() {
