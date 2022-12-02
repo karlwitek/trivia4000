@@ -210,7 +210,7 @@ const App = {
       body: JSON.stringify(gameObj)
     };
 
-    return fetch(url, init);//.then(response => response.text());
+    return fetch(url, init);
   },
 
   promptUser() {
