@@ -28,7 +28,7 @@ const App = {
     this.questionIndex = 0;
     
     this.questions = await this.makeReqForQuestions().catch(this.test2);// 1st
-    this.user = await this.findUserObject();
+    this.user = await this.findUserObject().catch(this.test2);
     this.getRefToElements();
     this.createTemplateFn();
     this.renderQuestion();
@@ -65,7 +65,7 @@ const App = {
   },
 
   test2(err) {
-    console.log(err);
+    console.error(err);
   },
 
   findUserObject() {
