@@ -2,20 +2,13 @@
 const Login = {
   async init() {
     this.bindEvents();
-    let resetText = await this.inactivatePlayers().catch(this.logError);
-
-    console.log(resetText);
-
+    await this.inactivatePlayers().catch(this.logError);
     this.currentUser = {};
   },
 
   inactivatePlayers() {
-    let url = '/reset99';
-    // fetch(url).then(response => response.text())
-    //   .then(text => console.log(text)).catch((err) => console.error(err));
-
+    let url = '/reset';
     return fetch(url).then(response => response.text());
-    //.then(text => console.log(text));//.catch((err) => console.error(err));
   },
 
   logError(err) {
@@ -69,7 +62,6 @@ const Login = {
     fetch(url, init).then(response => response.json())
       .then(data => {// data is an [ {} ] , or empty..
         if (data.length > 0) {
-          console.log(data[0]);
           this.recordCurrentUser(data[0]);
           this.requestGamePage();
         } else {
@@ -79,7 +71,7 @@ const Login = {
       .catch((err) => console.error(err));
   },
 
-  sendNewUserData(newUserObj) {// ok, change route
+  sendNewUserData(newUserObj) {
     let url = '/new';
     let init = {
       method: 'POST',
@@ -92,7 +84,6 @@ const Login = {
         console.log(text);
         this.showSuccessMsg();
       }).catch((err) => console.error(err));
-    // route sends text back, logged only
   },
 
   showSuccessMsg() {
