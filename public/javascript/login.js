@@ -2,8 +2,10 @@
 const Login = {
   async init() {
     this.bindEvents();
-    await this.inactivatePlayers().catch(this.logError);
+    let resetText = await this.inactivatePlayers().catch(this.logError);
 
+    console.log(resetText);
+    
     this.currentUser = {};
   },
 
@@ -12,8 +14,8 @@ const Login = {
     // fetch(url).then(response => response.text())
     //   .then(text => console.log(text)).catch((err) => console.error(err));
 
-    fetch(url).then(response => response.text())
-      .then(text => console.log(text));//.catch((err) => console.error(err));
+    return fetch(url).then(response => response.text());
+    //.then(text => console.log(text));//.catch((err) => console.error(err));
   },
 
   logError(err) {
