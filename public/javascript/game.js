@@ -26,8 +26,7 @@ class Game {
 const App = {
   init: async function() {
     this.questionIndex = 0;
-    
-    this.questions = await this.makeReqForQuestions().catch(this.logError);// 1st
+    this.questions = await this.makeReqForQuestions().catch(this.logError);
     this.user = await this.findUserObject().catch(this.logError);
     this.getRefToElements();
     this.createTemplateFn();
@@ -60,7 +59,7 @@ const App = {
   // },
 
   async makeReqForQuestions() {
-    const url = "https://99the-trivia-api.com/api/questions?limit=50&region=US&difficulty=medium";
+    const url = "https://the-trivia-api.com/api/questions?limit=50&region=US&difficulty=medium";
     return fetch(url).then(response => response.json());
   },
 
