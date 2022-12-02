@@ -212,7 +212,7 @@ const App = {
       body: JSON.stringify(gameObj)
     };
 
-    return fetch(url, init).then(response => response.text());
+    return fetch(url, init);//.then(response => response.text());
   },
 
   promptUser() {
@@ -230,7 +230,7 @@ const App = {
     standingsDiv.classList.remove('hide_overlay');
 
     // get all users, pass to template fn
-    let arrayUsers = await this.getAllUsers();
+    let arrayUsers = await this.getAllUsers().catch(this.logError);
     
     function compare(a, b) {
       if (a.numgamesplayed > b.numgamesplayed) { return -1 };
@@ -244,8 +244,7 @@ const App = {
   },
 
   getAllUsers() {
-    return fetch('/data').then(response => response.json())
-      .then(data => data).catch((err) => console.log(err));
+    return fetch('/data').then(response => response.json());
   },
 
   removeOverlay() {
