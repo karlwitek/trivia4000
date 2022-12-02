@@ -5,12 +5,12 @@ const Login = {
     let resetText = await this.inactivatePlayers().catch(this.logError);
 
     console.log(resetText);
-    
+
     this.currentUser = {};
   },
 
   inactivatePlayers() {
-    let url = '/reset';
+    let url = '/reset99';
     // fetch(url).then(response => response.text())
     //   .then(text => console.log(text)).catch((err) => console.error(err));
 
