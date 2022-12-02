@@ -89,7 +89,7 @@ router.post('/new', (req, res) => {
         console.log(err.stack);
         process.exit(1);
       } else {
-        res.send('new user saved.');
+        res.send('saved');
       };
     });
 });

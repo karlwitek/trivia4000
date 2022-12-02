@@ -74,7 +74,7 @@ const Login = {
       body: JSON.stringify(newUserObj)
     };
 
-    return fetch(url, init);
+    return fetch(url, init).then(response => response.text());
 
     // fetch(url, init).then(response => response.text())
     //   .then(text => {
@@ -95,7 +95,10 @@ const Login = {
       userpassword: form.password.value,
     };
 
-    await this.sendNewUserData(idObj).catch(this.logError);
+    let text = await this.sendNewUserData(idObj).catch(this.logError);
+    if (text === 'saved') {
+      this.showSuccessMsg();
+    }
   },
 
   requestGamePage() {
