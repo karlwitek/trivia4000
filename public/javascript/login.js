@@ -47,7 +47,7 @@ const Login = {
 
     let userArray = await this.searchForUser(userInfo).catch(this.logError);
     if (userArray.length > 0) {
-        this.recordCurrentUser(userArray[0]);
+        await this.recordCurrentUser(userArray[0]).catch(this.logError);
         this.requestGamePage();
     } else {
       this.showNotFoundMsg();
@@ -64,17 +64,6 @@ const Login = {
     };
 
     return fetch(url, init).then(response => response.json());
-
-    // fetch(url, init).then(response => response.json())
-    //   .then(data => {// data is an [ {} ] , or empty..
-    //     if (data.length > 0) {
-    //       this.recordCurrentUser(data[0]);
-    //       this.requestGamePage();
-    //     } else {
-    //       this.showNotFoundMsg();
-    //     }
-    //   })
-    //   .catch((err) => console.error(err));
   },
 
   sendNewUserData(newUserObj) {
@@ -120,8 +109,10 @@ const Login = {
       body: JSON.stringify(userObj)
     };
 
-    fetch(url, init).then(response => response.text())
-      .then(text => console.log(text)).catch((err) => console.error(err));
+    return fetch(url, init);
+
+    // fetch(url, init).then(response => response.text())
+    //   .then(text => console.log(text)).catch((err) => console.error(err));
   },
 
   showNotFoundMsg() {
