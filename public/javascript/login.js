@@ -102,10 +102,10 @@ const Login = {
   },
 
   requestGamePage() {
-    //window.location.href = "http://localhost:5000/game";
+    window.location.href = "http://localhost:5000/game";
 
     // production :
-    window.location.href = "http://trivia4000.herokuapp.com/game";
+    // window.location.href = "http://trivia4000.herokuapp.com/game";
   },
 
   recordCurrentUser(userObj) {
