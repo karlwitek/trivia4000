@@ -54,7 +54,9 @@ const App = {
       // window.location.href = process.env.LOCAL_URL || "http://trivia4000.herokuapp.com";
       // above line NO
 
-      window.location.href = `${window.location.href}game`;
+      let signInUrl = window.location.href.replace('/game', '');
+
+      window.location.href = signInUrl;
 
     });
   },
