@@ -64,7 +64,9 @@ const App = {
 
   async makeReqForQuestions() {
     const url = "https://99the-trivia-api.com/api/questions?limit=50&region=US&difficulty=medium";
-    return fetch(url).then(response => response.json());
+    return fetch(url).then(response => response.json()).catch((err) => {
+      throw err;
+    });
   },
 
   findUserObject() {
