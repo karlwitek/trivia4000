@@ -47,17 +47,8 @@ const App = {
 
     const quitBtn = document.getElementById('quit');
     quitBtn.addEventListener('mousedown', () => {
-      // window.location.href = "http://trivia4000.herokuapp.com";
-      // need diff value for running locally
-      // window.location.href = "http://localhost:5000";
-
-      // window.location.href = process.env.LOCAL_URL || "http://trivia4000.herokuapp.com";
-      // above line NO
-
       let signInUrl = window.location.href.replace('/game', '');
-
       window.location.href = signInUrl;
-
     });
   },
 

@@ -102,17 +102,7 @@ const Login = {
   },
 
   requestGamePage() {
-    // window.location.href = "http://localhost:5000/game";
-
-    // production :
-    // window.location.href = "http://trivia4000.herokuapp.com/game";
-
-    // window.location.href = process.env.LOCAL_URL || "http://trivia4000.herokuapp.com";// BAD
-
     window.location.href = `${window.location.href}game`;
-
-    
-
   },
 
   recordCurrentUser(userObj) {
@@ -126,8 +116,6 @@ const Login = {
 
     fetch(url, init).then(response => response.text())
       .then(text => console.log(text)).catch((err) => console.error(err));
-    // route sends text back. logging in console for now
-
   },
 
   showNotFoundMsg() {
