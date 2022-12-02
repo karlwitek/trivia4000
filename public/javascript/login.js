@@ -8,7 +8,7 @@ const Login = {
 
   inactivatePlayers() {
     let url = '/reset';
-    return fetch(url).then(response => response.text());
+    return fetch(url);//.then(response => response.text());
   },
 
   logError(err) {
@@ -36,7 +36,7 @@ const Login = {
     h2.classList.remove('show');
   },
 
-  checkAuthentication() {
+  async checkAuthentication() {
     const nameInput = document.getElementById('name');
     const passwordInput = document.getElementById('password');
 
@@ -45,30 +45,36 @@ const Login = {
       userpassword: passwordInput.value
     };
 
-    this.searchForUser(userInfo);
+    let userArray = await this.searchForUser(userInfo.catch(this.logError));
+    if (userArray.length > 0) {
+        this.recordCurrentUser(data[0]);
+        this.requestGamePage();
+    } else {
+      this.showNotFoundMsg();
+    }
+
   },
 
-  searchForUser(userObj) {
+  async searchForUser(userObj) {
     let url = '/login';
-
-    console.log(userObj);
-
     let init = {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(userObj)
     };
 
-    fetch(url, init).then(response => response.json())
-      .then(data => {// data is an [ {} ] , or empty..
-        if (data.length > 0) {
-          this.recordCurrentUser(data[0]);
-          this.requestGamePage();
-        } else {
-          this.showNotFoundMsg();
-        }
-      })
-      .catch((err) => console.error(err));
+    return fetch(url, init).then(response => response.json);
+
+    // fetch(url, init).then(response => response.json())
+    //   .then(data => {// data is an [ {} ] , or empty..
+    //     if (data.length > 0) {
+    //       this.recordCurrentUser(data[0]);
+    //       this.requestGamePage();
+    //     } else {
+    //       this.showNotFoundMsg();
+    //     }
+    //   })
+    //   .catch((err) => console.error(err));
   },
 
   sendNewUserData(newUserObj) {
