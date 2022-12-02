@@ -63,7 +63,7 @@ const App = {
   // },
 
     makeReqForQuestions() {
-    const url = "https://the-trivia-api.com/api/questions?limit=50&region=US&difficulty=medium";
+    const url = "https://99the-trivia-api.com/api/questions?limit=50&region=US&difficulty=medium";
     return fetch(url).then(response => response.json());
   },
 
