@@ -26,13 +26,17 @@ class Game {
 const App = {
   init: async function() {
     this.questionIndex = 0;
-    this.questions = await this.makeReqForQuestions();
-    this.user = await this.findUserObject();
-    this.getRefToElements();
-    this.createTemplateFn();
-    this.renderQuestion();
-    this.setUpGameObjects();
-    this.bindEvents();
+    try {
+      this.questions = await this.makeReqForQuestions();// 1st
+      this.user = await this.findUserObject();
+      this.getRefToElements();
+      this.createTemplateFn();
+      this.renderQuestion();
+      this.setUpGameObjects();
+      this.bindEvents();
+    } catch (err) {
+      console.log(err);
+    }
   },
 
   bindEvents() {
@@ -52,10 +56,15 @@ const App = {
     });
   },
 
-  makeReqForQuestions() {
+  // makeReqForQuestions() {
+  //   const url = "https://the-trivia-api.com/api/questions?limit=50&region=US&difficulty=medium";
+  //   return fetch(url).then(response => response.json())
+  //   .catch((err) => console.error(err));
+  // },
+
+    makeReqForQuestions() {
     const url = "https://the-trivia-api.com/api/questions?limit=50&region=US&difficulty=medium";
-    return fetch(url).then(response => response.json())
-    .catch((err) => console.error(err));
+    return fetch(url).then(response => response.json());
   },
 
   findUserObject() {
