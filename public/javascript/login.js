@@ -109,7 +109,7 @@ const Login = {
 
     // window.location.href = process.env.LOCAL_URL || "http://trivia4000.herokuapp.com";// BAD
 
-    window.location.href = `${window.location.href}/game`;
+    window.location.href = `${window.location.href}game`;
 
     
 
