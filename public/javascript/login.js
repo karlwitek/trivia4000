@@ -47,7 +47,7 @@ const Login = {
 
     let userArray = await this.searchForUser(userInfo).catch(this.logError);
     if (userArray.length > 0) {
-        this.recordCurrentUser(data[0]);
+        this.recordCurrentUser(userArray[0]);
         this.requestGamePage();
     } else {
       this.showNotFoundMsg();
