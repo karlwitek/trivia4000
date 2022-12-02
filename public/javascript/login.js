@@ -45,7 +45,7 @@ const Login = {
       userpassword: passwordInput.value
     };
 
-    let userArray = await this.searchForUser(userInfo.catch(this.logError));
+    let userArray = await this.searchForUser(userInfo).catch(this.logError);
     if (userArray.length > 0) {
         this.recordCurrentUser(data[0]);
         this.requestGamePage();
