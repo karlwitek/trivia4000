@@ -61,6 +61,10 @@ router.get('/find', (req, res) => {
   });
 });
 
+router.get('/test', (req, res) => {
+  res.redirect('/game');
+});
+
 // posts
 
 router.post('/login', (req, res) => {
