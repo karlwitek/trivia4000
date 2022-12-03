@@ -62,7 +62,7 @@ router.get('/find', (req, res) => {
 });
 
 router.get('/test', (req, res) => {
-  res.redirect('/game');
+  res.redirect('http://localhost:5000/game');
 });
 
 // posts
