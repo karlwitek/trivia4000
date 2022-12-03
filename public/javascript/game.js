@@ -24,13 +24,17 @@ class Game {
 const App = {
   init: async function() {
     this.questionIndex = 0;
-    this.questions = await this.makeReqForQuestions().catch(this.logError);
-    this.user = await this.findUserObject().catch(this.logError);
-    this.getRefToElements();
-    this.createTemplateFn();
-    this.renderQuestion();
-    this.setUpGameObjects();
-    this.bindEvents();
+    try {
+      this.questions = await this.makeReqForQuestions();
+      this.user = await this.findUserObject();
+      this.getRefToElements();
+      this.createTemplateFn();
+      this.renderQuestion();
+      this.setUpGameObjects();
+      this.bindEvents();
+    } catch (err) {
+        this.logError(err);
+    }
   },
 
   bindEvents() {
