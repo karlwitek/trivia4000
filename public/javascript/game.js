@@ -45,9 +45,8 @@ const App = {
 
     const quitBtn = document.getElementById('quit');
     quitBtn.addEventListener('mousedown', () => {
-      // let signInUrl = window.location.href.replace('/game', '');
-      // window.location.href = signInUrl;
-      window.location.href = '';
+      let signInUrl = window.location.href.replace('/game', '');
+      window.location.href = signInUrl;
     });
   },
 
