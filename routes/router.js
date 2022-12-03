@@ -61,10 +61,6 @@ router.get('/find', (req, res) => {
   });
 });
 
-router.get('/test', (req, res) => {
-  res.redirect('http://localhost:5000/game');
-});
-
 // posts
 
 router.post('/login', (req, res) => {

@@ -96,7 +96,8 @@ const Login = {
 
   requestGamePage() {
     // window.location.href = `${window.location.href}game`;
-    fetch('/test');
+    window.location.href = 'game';
+
   },
 
   recordCurrentUser(userObj) {
