@@ -94,9 +94,16 @@ const Login = {
     }
   },
 
-  requestGamePage() {
-    window.location.href = 'game';
+  async requestGamePage() {
+    let htmlStr = await fetch('/game').then(response => response.text()).catch(console.error);// 
+    let newHTML = document.open("text/html", "replace");
+    newHTML.write(htmlStr);
+    newHTML.close();
   },
+
+  // requestGamePage() {
+  //   window.location.href = 'game';
+  // },
 
   recordCurrentUser(userObj) {
     let url = '/active';
